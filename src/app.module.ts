@@ -1,7 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
+import { APP_FILTER, APP_INTERCEPTOR } from "@nestjs/core";
 import * as path from "path";
 
+import { ClassifiedExceptionFilter } from "@/base/filters/classified.exception.filter";
+import { OutInterceptor } from "@/base/interceptors/out.interceptor";
 import developmentSchema from "@/config/env/schema.development";
 import productionSchema from "@/config/env/schema.production";
 
@@ -35,6 +38,15 @@ import { RedisConfigModule } from "./config/redis/redis.config.module";
     RedisConfigModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: OutInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: ClassifiedExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

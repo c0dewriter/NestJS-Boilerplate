@@ -1,8 +1,10 @@
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { Logger, Module, OnModuleInit } from "@nestjs/common";
+import { InjectDataSource, TypeOrmModule } from "@nestjs/typeorm";
+import { DataSource } from "typeorm";
 
 import { PostgresConfigService } from "./postgres.config.service";
 
+export const POSTGRES_CONFIG_MODULE_CONTEXT = "Postgres";
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -35,4 +37,14 @@ import { PostgresConfigService } from "./postgres.config.service";
   providers: [PostgresConfigService],
   exports: [PostgresConfigService],
 })
-export class PostgresConfigModule {}
+export class PostgresConfigModule implements OnModuleInit {
+  constructor(
+    @InjectDataSource()
+    private readonly dataSource: DataSource,
+  ) {}
+
+  async onModuleInit() {
+    await this.dataSource.query("SELECT 1");
+    Logger.log("Connected to PostgreSQL", POSTGRES_CONFIG_MODULE_CONTEXT);
+  }
+}
