@@ -23,10 +23,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@base/*": ["src/base/*"],
-      "@config/*": ["src/config/*"],
-      "@irancell/*": ["src/irancell/*"],
-      "@contractor/*": ["src/sub-contractor/*"],
-      "@fusion-plan/*": ["src/fusion-plan/*"]
+      "@config/*": ["src/config/*"]
     }
   }
 }
