@@ -5,15 +5,11 @@ import * as path from "path";
 import developmentSchema from "@/config/env/schema.development";
 import productionSchema from "@/config/env/schema.production";
 
+import { PostgresConfigModule } from "./config/postgres/postgres.config.module";
 import { RedisConfigModule } from "./config/redis/redis.config.module";
 
 @Module({
   imports: [
-    // ** =============================================================== ** //
-    // **                            Databases                            ** //
-    // ** =============================================================== ** //
-    RedisConfigModule,
-
     // ** =============================================================== ** //
     // **                        Env Configuration                        ** //
     // ** =============================================================== ** //
@@ -31,6 +27,12 @@ import { RedisConfigModule } from "./config/redis/redis.config.module";
         presence: "required",
       },
     }),
+
+    // ** =============================================================== ** //
+    // **                            Databases                            ** //
+    // ** =============================================================== ** //
+    PostgresConfigModule,
+    RedisConfigModule,
   ],
   controllers: [],
   providers: [],
