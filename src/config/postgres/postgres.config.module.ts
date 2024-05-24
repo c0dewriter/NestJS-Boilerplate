@@ -4,8 +4,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { PostgresConfigService } from "./postgres.config.service";
 
 @Module({
-  providers: [PostgresConfigService],
-  exports: [PostgresConfigService],
   imports: [
     TypeOrmModule.forRootAsync({
       imports: [PostgresConfigModule],
@@ -34,5 +32,7 @@ import { PostgresConfigService } from "./postgres.config.service";
       }),
     }),
   ],
+  providers: [PostgresConfigService],
+  exports: [PostgresConfigService],
 })
 export class PostgresConfigModule {}

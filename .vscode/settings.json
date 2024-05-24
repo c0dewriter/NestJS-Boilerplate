@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["INITDB", "nestjs", "ormconf", "swcrc", "typeorm"]
+  "cSpell.words": [
+    "ENDCOLOR",
+    "INITDB",
+    "nestjs",
+    "ormconf",
+    "STARTCOLOR",
+    "swcrc",
+    "typeorm",
+    "urandom"
+  ]
 }

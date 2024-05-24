@@ -1,0 +1,211 @@
+#!/usr/bin/env bash
+
+# ======================================================================= #
+#                               Shell Params                              #
+# ======================================================================= #
+set -o errexit
+set -e
+shopt -s expand_aliases
+
+
+# ======================================================================= #
+#                                  Setup                                  #
+# ======================================================================= #
+DC="${DC:-exec}"
+
+# If we're running in CI we need to disable TTY allocation for docker compose
+# commands that enable it by default, such as exec and run.
+TTY=""
+if [ ! -t 1 ]; then
+  TTY="-T"
+fi
+
+# ======================================================================= #
+#                                Utilities                                #
+# ======================================================================= #
+check_executable () {
+  executable_name=$1;
+
+  print_style "Checking $executable_name... " "info"
+
+  if ! command -v "$executable_name" &> /dev/null; then
+    print_style "Missing" "danger";
+    exit 1;
+  fi
+
+  print_style "$(command -v "$executable_name"); \n" "success";
+}
+
+
+generate_secret() {
+  length=$1;
+
+  LC_ALL=C tr -dc \
+    'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom \
+    | head -c "$length" ; echo
+}
+
+generate_safer_secret() {
+  length=$1;
+
+  LC_ALL=C tr -dc \
+    'A-Za-z0-9' </dev/urandom \
+    | head -c "$length" ; echo  
+}
+
+print_style() {
+  if [ "$2" = "info" ] ; then
+      COLOR="96m";
+  elif [ "$2" = "success" ] ; then
+      COLOR="92m";
+  elif [ "$2" = "warning" ] ; then
+      COLOR="93m";
+  elif [ "$2" = "danger" ] ; then
+      COLOR="91m";
+  else #default color
+      COLOR="0m";
+  fi
+
+  STARTCOLOR="\e[$COLOR";
+  ENDCOLOR="\e[0m";
+
+  printf "$STARTCOLOR%b$ENDCOLOR" "$1";
+}
+
+# ======================================================================= #
+#                                Migration                                #
+# ======================================================================= #
+_build_migration_command() {
+  # ? I know I know. Try using 'npx' yourself and see what happens.
+  
+  echo ./node_modules/.bin/typeorm-ts-node-commonjs \
+    -d "$MIGRATION_CONF_FILE" \
+    "migration:$1" \
+    "$MIGRATION_ROOT_DIR/""$2""_""$3" 
+}
+
+_get_last_migration_code() {
+  source "./.env.development"
+
+  find "$MIGRATION_ROOT_DIR" -type f -name "[0-9][0-9][0-9][0-9]*.ts" | 
+      awk -F_ '{print $NF}' | 
+      cut -d '.' -f 1 | 
+      sort -r | 
+      head -n 1
+}
+
+_generate_next_migration_code() {
+  # shellcheck source=./.env.development
+  source "./.env.development"
+
+  last_migration_code=$(_get_last_migration_code)
+
+  printf "%04d\n" $((10#$last_migration_code + 1))
+
+}
+
+_escape()
+{
+  case $# in 0) return 0; esac
+  (
+    while :
+    do
+      printf "'"
+      unescaped=$1
+      while :
+      do
+        case $unescaped in
+
+        *\'*)
+          printf %s "${unescaped%%\'*}""'\''"
+          unescaped=${unescaped#*\'}
+          ;;
+        *)
+          printf %s "$unescaped"
+          break
+        esac
+      done
+      shift
+      case $# in 0) break; esac
+      printf "' "
+    done
+    printf "'\n"
+  )
+}
+
+_sanitize_migration_name() {
+  migration_name="$1"
+
+  if [ -z "$1" ]; then
+    echo "Missing migration name."
+    exit 1
+  fi
+
+  _escape "$migration_name" | \
+    tr -d '[:punct:]' | \
+    tr '[:upper:]' '[:lower:]' | \
+    tr ' ' '_'
+}
+
+migration_create_empty() {
+  migration_name=$(_sanitize_migration_name "$1")
+
+  . "./.env.development"
+
+  printf "Creating Empty Migration %s inside %s\n" "$migration_name" "$MIGRATION_ROOT_DIR"
+
+  npx typeorm-ts-node-commonjs migration:create "$MIGRATION_ROOT_DIR/$1""_""$(_generate_next_migration_code)"
+}
+
+migration_generate() {
+  migration_name=$(_sanitize_migration_name "$1")
+
+  source "./.env.development"
+
+  next_migration_code=$(_generate_next_migration_code)
+  migration_command=$(_build_migration_command "generate" "$migration_name" "$next_migration_code")
+
+  printf "Generating Migration Number %s\n" "$next_migration_code"
+
+  exec $migration_command
+}
+
+# migration_revert() {
+#   . "./.env.development"
+
+#   last_migration_code=$(_get_last_migration_code)
+#   migration_command=$(_build_migration_command "revert" "$last_migration_code")
+
+#   printf "Reverting Migration Number %s\n" "$last_migration_code"
+
+#   exec "$migration_command"
+# }
+
+migration_run() {
+  # shellcheck source=.env.production
+  # shellcheck source=.env.development
+  source "./.env.$NODE_ENV"
+
+  migration_command=$(_build_migration_command "run" "")
+
+  printf "Running Migrations..."
+
+  npx typeorm-ts-node-commonjs migration:run \
+    -d "$MIGRATION_CONF_FILE"
+
+}
+
+
+# ======================================================================= #
+#                                 Help!!!                                 #
+# ======================================================================= #
+help() {
+  printf "%s <task> [args]\n\nTasks:\n" "${0}"
+
+  compgen -A function | grep -v "^_" | cat -n
+
+  printf "\nExtended help:\n  Each task has comments for general usage\n"
+} 
+
+TIMEFORMAT=$'\nTask completed in %3lR'
+"${@:-help}"
