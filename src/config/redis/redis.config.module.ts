@@ -1,11 +1,11 @@
-import { Inject, Logger, Module, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
+import { Inject, Logger, Module, OnModuleInit } from "@nestjs/common";
+import { Redis } from "ioredis";
 
 import {
   REDIS_CLIENT_01,
   REDIS_CONFIG_MODULE_CONTEXT,
   redisProvider,
 } from "./redis.config.service";
-import { Redis } from "ioredis";
 
 @Module({
   providers: [...redisProvider],

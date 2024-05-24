@@ -1,8 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import * as path from "path";
+
 import developmentSchema from "@/config/env/schema.development";
 import productionSchema from "@/config/env/schema.production";
+
 import { RedisConfigModule } from "./config/redis/redis.config.module";
 
 @Module({
