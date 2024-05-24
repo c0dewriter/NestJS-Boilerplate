@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -16,6 +19,14 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@base/*": ["src/base/*"],
+      "@config/*": ["src/config/*"],
+      "@irancell/*": ["src/irancell/*"],
+      "@contractor/*": ["src/sub-contractor/*"],
+      "@fusion-plan/*": ["src/fusion-plan/*"]
+    }
   }
 }

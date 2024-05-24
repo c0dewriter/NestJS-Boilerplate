@@ -1,0 +1,2 @@
+# For reading shit like .env files etc.
+external-sources=true
