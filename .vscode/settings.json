@@ -6,6 +6,7 @@
     "ormconf",
     "STARTCOLOR",
     "swcrc",
+    "timestamptz",
     "typeorm",
     "urandom"
   ],
