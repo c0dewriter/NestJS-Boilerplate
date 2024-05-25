@@ -5,6 +5,7 @@ import * as path from "path";
 
 import { ClassifiedExceptionFilter } from "@/base/filters/classified.exception.filter";
 import { OutInterceptor } from "@/base/interceptors/out.interceptor";
+import { GlobalPostgresQueryManagerModule } from "@/base/modules/postgres/postgres.qm.module";
 import developmentSchema from "@/config/env/schema.development";
 import productionSchema from "@/config/env/schema.production";
 import { MongoConfigModule } from "@/config/mongo/mongo.config.module";
@@ -33,12 +34,17 @@ import { RedisConfigModule } from "@/config/redis/redis.config.module";
     }),
 
     // ** =============================================================== ** //
-    // **                            Databases                            ** //
+    // **                     Database Configurations                     ** //
     // ** =============================================================== ** //
     PostgresConfigModule,
     RedisConfigModule,
     MongoConfigModule,
     Neo4JConfigModule,
+
+    // ** =============================================================== ** //
+    // **                        Database Services                        ** //
+    // ** =============================================================== ** //
+    GlobalPostgresQueryManagerModule,
   ],
   controllers: [],
   providers: [
