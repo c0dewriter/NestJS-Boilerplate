@@ -2,9 +2,10 @@ import { Logger, Module, OnModuleInit } from "@nestjs/common";
 import { InjectDataSource, TypeOrmModule } from "@nestjs/typeorm";
 import { DataSource } from "typeorm";
 
-import { PostgresConfigService } from "./postgres.config.service";
+import { PostgresConfigService } from "@/config/postgres/postgres.config.service";
 
 export const POSTGRES_CONFIG_MODULE_CONTEXT = "Postgres";
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({

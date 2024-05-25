@@ -23,4 +23,13 @@ export default Joi.object({
   REDIS_CACHE_DB_NUMBER: Joi.number(),
   REDIS_USERNAME: Joi.string().allow(""),
   REDIS_PASSWORD: Joi.string(),
+
+  // ** ============================ Mongo ============================ ** //
+  MONGO_CONNECTION_SCHEME: Joi.string().valid("mongodb", "mongodb+srv"),
+  MONGO_HOST: Joi.string().valid("localhost", "127.0.0.1"),
+  MONGO_INITDB_ROOT_USERNAME: Joi.string(),
+  MONGO_INITDB_ROOT_PASSWORD: Joi.string(),
+  MONGO_INITDB_DATABASE: Joi.string(),
+  MONGO_SERVICE_PORT_MAP: Joi.string().pattern(SERVICE_PORT_MAP_REGEX),
+  MONGO_SERVICE_PORT_EXPOSE: Joi.number().greater(1023),
 });

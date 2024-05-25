@@ -7,9 +7,9 @@ import { ClassifiedExceptionFilter } from "@/base/filters/classified.exception.f
 import { OutInterceptor } from "@/base/interceptors/out.interceptor";
 import developmentSchema from "@/config/env/schema.development";
 import productionSchema from "@/config/env/schema.production";
-
-import { PostgresConfigModule } from "./config/postgres/postgres.config.module";
-import { RedisConfigModule } from "./config/redis/redis.config.module";
+import { MongoConfigModule } from "@/config/mongo/mongo.config.module";
+import { PostgresConfigModule } from "@/config/postgres/postgres.config.module";
+import { RedisConfigModule } from "@/config/redis/redis.config.module";
 
 @Module({
   imports: [
@@ -36,6 +36,7 @@ import { RedisConfigModule } from "./config/redis/redis.config.module";
     // ** =============================================================== ** //
     PostgresConfigModule,
     RedisConfigModule,
+    MongoConfigModule,
   ],
   controllers: [],
   providers: [
