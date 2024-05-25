@@ -8,7 +8,7 @@ namespace NodeJS {
     REDIS_GENERAL_CACHE_TTL: string;
     REDIS_USERNAME: string;
     REDIS_PASSWORD: string;
-    REDIS_SERVER_PORT_MAP: string;
+    REDIS_SERVER_PORT_MAP: `${number}:${number}`;
     REDIS_INSIGHT_PORT_MAP: string;
     REDIS_SERVER_PORT_EXPOSE: string;
   }

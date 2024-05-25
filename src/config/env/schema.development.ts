@@ -32,4 +32,12 @@ export default Joi.object({
   MONGO_INITDB_DATABASE: Joi.string(),
   MONGO_SERVICE_PORT_MAP: Joi.string().pattern(SERVICE_PORT_MAP_REGEX),
   MONGO_SERVICE_PORT_EXPOSE: Joi.number().greater(1023),
+
+  // ** ============================= Neo ============================= ** //
+  NEO4J_CONNECTION_SCHEME: Joi.string().valid("neo4j", "neo4j+s", "bolt", "bolt+s"),
+  NEO4J_HOST: Joi.string().valid("localhost", "127.0.0.1"),
+  NEO4J_SERVICE_PORT_MAP: Joi.string().pattern(SERVICE_PORT_MAP_REGEX),
+  NEO4J_SERVICE_PORT_EXPOSE: Joi.number().greater(1023),
+  NEO4J_USERNAME: Joi.string(),
+  NEO4J_PASSWORD: Joi.string(),
 });

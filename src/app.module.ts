@@ -8,6 +8,7 @@ import { OutInterceptor } from "@/base/interceptors/out.interceptor";
 import developmentSchema from "@/config/env/schema.development";
 import productionSchema from "@/config/env/schema.production";
 import { MongoConfigModule } from "@/config/mongo/mongo.config.module";
+import { Neo4JConfigModule } from "@/config/neo4j/neo4j.config.module";
 import { PostgresConfigModule } from "@/config/postgres/postgres.config.module";
 import { RedisConfigModule } from "@/config/redis/redis.config.module";
 
@@ -37,6 +38,7 @@ import { RedisConfigModule } from "@/config/redis/redis.config.module";
     PostgresConfigModule,
     RedisConfigModule,
     MongoConfigModule,
+    Neo4JConfigModule,
   ],
   controllers: [],
   providers: [

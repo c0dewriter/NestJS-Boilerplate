@@ -5,7 +5,7 @@ import {
   REDIS_CLIENT_01,
   REDIS_CONFIG_MODULE_CONTEXT,
   redisProvider,
-} from "@/config/redis/redis.config.service";
+} from "@/config/redis/redis.config.provider";
 
 @Module({
   providers: [...redisProvider],

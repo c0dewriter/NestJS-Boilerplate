@@ -1,7 +1,7 @@
 import { Logger, type Provider } from "@nestjs/common";
 import { Redis } from "ioredis";
 
-export const REDIS_CLIENT_01 = "REDIS_CLIENT";
+export const REDIS_CLIENT_01 = "REDIS_CLIENT_01";
 export const REDIS_CONFIG_MODULE_CONTEXT = "Redis";
 
 export const redisProvider: Array<Provider<Redis>> = [

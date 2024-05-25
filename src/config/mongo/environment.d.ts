@@ -10,7 +10,7 @@ namespace NodeJS {
 
     MONGO_SERVICE_NAME: string;
     MONGO_RESTART_POLICY: string;
-    MONGO_SERVICE_PORT_MAP: string;
+    MONGO_SERVICE_PORT_MAP: `${number}:${number}`;
     MONGO_SERVICE_PORT_EXPOSE: string;
     MONGO_SERVICE_DIR_NAME: string;
   }
