@@ -1,6 +1,12 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { APP_FILTER, APP_INTERCEPTOR } from "@nestjs/core";
+import {
+  AcceptLanguageResolver,
+  HeaderResolver,
+  I18nModule,
+  QueryResolver,
+} from "nestjs-i18n";
 import * as path from "path";
 
 import { ClassifiedExceptionFilter } from "@/base/filters/classified.exception.filter";
@@ -45,6 +51,22 @@ import { RedisConfigModule } from "@/config/redis/redis.config.module";
     // **                        Database Services                        ** //
     // ** =============================================================== ** //
     GlobalPostgresQueryManagerModule,
+
+    // ** =============================================================== ** //
+    // **                               I18n                              ** //
+    // ** =============================================================== ** //
+    I18nModule.forRoot({
+      fallbackLanguage: "en",
+      loaderOptions: {
+        path: path.join(__dirname, "/i18n/"),
+        watch: process.env.NODE_ENV === "development",
+      },
+      resolvers: [
+        new HeaderResolver(["x-app-lang"]),
+        new QueryResolver(["lang"]),
+        AcceptLanguageResolver,
+      ],
+    }),
   ],
   controllers: [],
   providers: [

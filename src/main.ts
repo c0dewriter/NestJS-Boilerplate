@@ -26,6 +26,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new I18nValidationPipe({
       transform: true,
+      whitelist: true,
       forbidUnknownValues: true,
       forbidNonWhitelisted: true,
       stopAtFirstError: process.env.NODE_ENV !== "development",
