@@ -20,10 +20,10 @@ export class PostgresConfigService {
   public readonly schema = process.env.POSTGRES_SCHEMA;
 
   public readonly entities = [
-    path.join(process.cwd(), "src/", "**", "*.entity.{ts,js}"),
+    path.join(__dirname, "../", "../", "**", "*.entity.{ts,js}"),
   ];
 
   public readonly subscribers = [
-    path.join(process.cwd(), "src/", "**", "*.subscriber.{ts,js}"),
+    path.join(__dirname, "../", "../", "**", "*.subscriber.{ts,js}"),
   ];
 }
