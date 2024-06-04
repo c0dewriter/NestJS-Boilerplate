@@ -3,7 +3,9 @@ import Joi from "joi";
 import { SERVICE_PORT_MAP_REGEX } from "@/config/env/regex";
 
 export default Joi.object({
+  // ** =========================== General =========================== ** //
   NODE_ENV: Joi.string().valid("development"),
+  SERVICE_BIND_PORT: Joi.number().greater(1023),
 
   // ** =========================== Postgres ========================== ** //
   POSTGRES_CONNECTION_SCHEME: Joi.string().valid("postgres", "postgresql"),

@@ -1,6 +1,9 @@
 {
   "cSpell.words": [
+    "addgroup",
+    "adduser",
     "ENDCOLOR",
+    "GNAME",
     "INITDB",
     "nestjs",
     "ormconf",
