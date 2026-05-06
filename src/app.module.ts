@@ -68,7 +68,6 @@ import { RedisConfigModule } from "@/config/redis/redis.config.module";
       ],
     }),
   ],
-  controllers: [],
   providers: [
     {
       provide: APP_INTERCEPTOR,
