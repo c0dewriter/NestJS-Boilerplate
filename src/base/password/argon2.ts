@@ -7,6 +7,8 @@ import * as argon2 from "argon2";
  * ? https://github.com/ranisalt/node-argon2/issues/76#issuecomment-291553840
  * ? https://github.com/P-H-C/phc-winner-argon2/blob/4ac8640c2adc1257677d27d3f833c8d1ee68c7d2/../../encoding.c#L242-L252
  *
+ * After reading all of the above, feel free to change stuff
+ *
  * @param plainPassword the raw password that, most likely, the user gave.
  * @returns a string containing the hashed form of the raw password.
  */
