@@ -6,7 +6,6 @@
   "private": true,
   "license": "UNLICENSED",
   "engines": {
-    "npm": "Please Use Yarn",
     "yarn": ">= 1.22.22",
     "node": ">= 21.1.0"
   },
@@ -25,7 +24,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docs": "compodoc -p compodoc.tsconfig.json -d docs/internal --theme material",
-    "docs:serve": "compodoc -p compodoc.tsconfig.json -d docs/internal --theme material -s"
+    "docs:serve": "compodoc -p compodoc.tsconfig.json -d docs/internal --theme material -s",
+    "cm": "cz"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -53,6 +53,10 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
+    "@commitlint/cz-commitlint": "^20.5.3",
+    "@commitlint/types": "^20.5.0",
     "@compodoc/compodoc": "^1.1.24",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
@@ -65,6 +69,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.42.0",
+    "commitizen": "^4.3.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
@@ -107,5 +112,10 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   }
 }
