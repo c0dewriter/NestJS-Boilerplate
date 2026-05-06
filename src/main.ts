@@ -40,7 +40,7 @@ async function bootstrap() {
     const openAPIConfig = new DocumentBuilder()
       .addBearerAuth()
       .setTitle("Boilerplate")
-      .setDescription("Super Stable and Production-Ready 😬")
+      .setDescription("Super Stable and Production-Ready.")
       .setVersion("0.1")
       .build();
 
@@ -52,6 +52,6 @@ async function bootstrap() {
     SwaggerModule.setup("/docs/v1/swagger/", app, swaggerDocument);
   }
 
-  await app.listen(process.env.SERVICE_BIND_PORT);
+  await app.listen(process.env.SERVICE_BIND_PORT ?? 4000);
 }
 bootstrap();

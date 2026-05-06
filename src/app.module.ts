@@ -14,10 +14,6 @@ import { OutInterceptor } from "@/base/interceptors/out.interceptor";
 import { GlobalPostgresQueryManagerModule } from "@/base/modules/postgres/postgres.qm.module";
 import developmentSchema from "@/config/env/schema.development";
 import productionSchema from "@/config/env/schema.production";
-import { MongoConfigModule } from "@/config/mongo/mongo.config.module";
-import { Neo4JConfigModule } from "@/config/neo4j/neo4j.config.module";
-import { PostgresConfigModule } from "@/config/postgres/postgres.config.module";
-import { RedisConfigModule } from "@/config/redis/redis.config.module";
 
 @Module({
   imports: [
@@ -42,10 +38,10 @@ import { RedisConfigModule } from "@/config/redis/redis.config.module";
     // ** =============================================================== ** //
     // **                     Database Configurations                     ** //
     // ** =============================================================== ** //
-    PostgresConfigModule,
-    RedisConfigModule,
-    MongoConfigModule,
-    Neo4JConfigModule,
+    // PostgresConfigModule,
+    // RedisConfigModule,
+    // MongoConfigModule,
+    // Neo4JConfigModule,
 
     // ** =============================================================== ** //
     // **                        Database Services                        ** //
@@ -68,7 +64,6 @@ import { RedisConfigModule } from "@/config/redis/redis.config.module";
       ],
     }),
   ],
-  controllers: [],
   providers: [
     {
       provide: APP_INTERCEPTOR,
