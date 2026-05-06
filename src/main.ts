@@ -40,7 +40,7 @@ async function bootstrap() {
     const openAPIConfig = new DocumentBuilder()
       .addBearerAuth()
       .setTitle("Boilerplate")
-      .setDescription("Super Stable and Production-Ready 😬")
+      .setDescription("Super Stable and Production-Ready.")
       .setVersion("0.1")
       .build();
 
