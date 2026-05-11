@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/c0dewriter/NestJS-Boilerplate/compare/boilerplate-v1.1.0...boilerplate-v2.0.0) (2026-05-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **commitlint:** Nothing breaks
+
+### Bug Fixes
+
+* **commitlint:** removed the commit types that were not recognized by release please ([ee06fa5](https://github.com/c0dewriter/NestJS-Boilerplate/commit/ee06fa5074e288b0e55a2cd5c7cbfca0a37d5a00)), closes [#14](https://github.com/c0dewriter/NestJS-Boilerplate/issues/14)
+
 ## [1.1.0](https://github.com/c0dewriter/NestJS-Boilerplate/compare/boilerplate-v1.0.0...boilerplate-v1.1.0) (2026-05-11)
 
 
