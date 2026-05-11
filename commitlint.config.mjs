@@ -15,15 +15,15 @@ const Configuration = {
 			2,
 			"always",
 			[
-				"ci", // Changes to CI/CD configuration and scripts
-				"chore", // Maintenance tasks that don't modify src or test files
-				"docs", // Documentation-only changes
+				// "ci", // Changes to CI/CD configuration and scripts
+				// "chore", // Maintenance tasks that don't modify src or test files
+				// "docs", // Documentation-only changes
 				"feat", // A new feature
 				"fix", // A bug fix
 				"perf", // A code change that improves performance
-				"refactor", // A code change that neither fixes a bug nor adds a feature
+				// "refactor", // A code change that neither fixes a bug nor adds a feature
 				"revert", // Reverts a previous commit
-				"style", // Changes that don't affect the meaning of the code (formatting, whitespace, etc.)
+				// "style", // Changes that don't affect the meaning of the code (formatting, whitespace, etc.)
 			],
 		],
 		"type-case": [2, "always", "lower-case"],
