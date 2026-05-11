@@ -12,7 +12,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(
     new I18nValidationExceptionFilter({
-      detailedErrors: false,
+      detailedErrors: true,
     }),
   );
 
